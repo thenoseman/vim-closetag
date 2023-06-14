@@ -17,6 +17,7 @@ fun! s:Initial()
 
     call s:Declare('g:closetag_shortcut', '>')
     call s:Declare('g:closetag_close_shortcut', '')
+    call s:Declare('g:closetag_close_at_end_only', 0)
 
     call s:Declare('g:closetag_emptyTags_caseSensitive', 0)
 
@@ -87,6 +88,7 @@ fun! s:InitBuf()
     call s:Declare('b:closetag_haveAtt', 0)
     call s:Declare('b:closetag_use_xhtml', &filetype == 'xhtml' ? 1 : 0)
     call s:Declare('b:closetag_enable_react_fragment', get(g:, 'closetag_enable_react_fragment'))
+    call s:Declare('b:closetag_close_at_end_only', get(g:, 'closetag_close_at_end_only'))
 endf
 
 fun! s:SavePos()
@@ -290,7 +292,7 @@ fun! s:CloseIt()
                         start
                         retu
                     en
-                el
+                elseif b:closetag_close_at_end_only == 0 || (b:closetag_close_at_end_only == 1 && l:endOfLine)
                     if b:closetag_haveAtt == 0
                         call s:Handler(b:closetag_tagName, b:closetag_html_mode)
                     en

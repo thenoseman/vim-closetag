@@ -99,6 +99,11 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 "
 let g:closetag_close_shortcut = '<leader>>'
+
+" integer value [0|1]
+" Close tags only if the cursor is at the end of the line and not mid-line
+"
+let g:closetag_close_at_end_only = 0
 ```
 
 ### Note about React fragments
